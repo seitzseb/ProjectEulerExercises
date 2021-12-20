@@ -11,4 +11,3 @@ for a in range(1,1000):
         if a+b+c == 1000:
             print(a,b,c,"solution: ",a*b*c)
             exit()
-
