@@ -26,11 +26,13 @@ for num in range(1,100):
         exit()
     print(Problem[0])
     print("\n\n")
-    if not os.path.exists("Problem"+str(num)):
-        os.system("mkdir Problem"+str(num))
+    numstring = str(num) if num >= 10 else "0"+str(num)
+    print(numstring)
+    if not os.path.exists("Problem"+numstring):
+        os.system("mkdir Problem"+numstring)
         print("created folder")
-    if not os.path.exists("Problem"+str(num)+"/angabe.txt"):
-        os.system("touch Problem"+str(num)+"/angabe.txt")
-        with open("Problem"+str(num)+"/angabe.txt","w") as f:
+    if not os.path.exists("Problem"+numstring+"/angabe.txt"):
+        os.system("touch Problem"+numstring+"/angabe.txt")
+        with open("Problem"+numstring+"/angabe.txt","w") as f:
             f.write(Problem[0])
 
