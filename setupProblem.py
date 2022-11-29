@@ -1,29 +1,36 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import re
+import time
+import os
 
-num = 10
-url = "http://www.projecteuler.net/problem="+str(num)
-html = urlopen(url).read()
-soup = BeautifulSoup(html, features="html.parser")
+for num in range(1,100):
+    url = "http://www.projecteuler.net/problem="+str(num)
+    html = urlopen(url).read()
+    soup = BeautifulSoup(html, features="html.parser")
 
-for script in soup(["script","style"]):
-    script.extract()
+    for script in soup(["script","style"]):
+        script.extract()
 
-text = soup.get_text()
+    text = soup.get_text()
 
-lines = (line.strip() for line in text.splitlines())
+    lines = (line.strip() for line in text.splitlines())
 
-chunks = (phrase.strip() for line in lines for phrase in line.split(" "))
-text = ' '.join (chunk for chunk in chunks if chunk)
-print(type(text))
+    chunks = (phrase.strip() for line in lines for phrase in line.split(" "))
+    text = ' '.join (chunk for chunk in chunks if chunk)
 
-printing = False
-sol = ""
-for char in text:
-    if printing:
-        sol+=char
-    if char == "%":
-        printing = True
-    if char == "|":
-        printing = False
-print(sol)
+    Problem = re.findall(".*%(.*) Project Euler:",text)
+    if len(Problem)>1:
+        print("FAIL")
+        print(text)
+        exit()
+    print(Problem[0])
+    print("\n\n")
+    if not os.path.exists("Problem"+str(num)):
+        os.system("mkdir Problem"+str(num))
+        print("created folder")
+    if not os.path.exists("Problem"+str(num)+"/angabe.txt"):
+        os.system("touch Problem"+str(num)+"/angabe.txt")
+        with open("Problem"+str(num)+"/angabe.txt","w") as f:
+            f.write(Problem[0])
+
