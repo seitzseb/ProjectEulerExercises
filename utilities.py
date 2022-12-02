@@ -4,9 +4,10 @@ def sieve(n):
     for p in range(2,n+1):
         if b[p]:
             ps.append(p)
+            print(p)
             for i in range(p,n+1,p):
                 b[i] = False
     return ps
 
 if __name__ == "__main__":
-    print(sieve(int(1e8))[-1])
+    print(sieve(int(100))[-1])
