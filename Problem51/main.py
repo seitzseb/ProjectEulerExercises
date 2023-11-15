@@ -17,4 +17,5 @@ print("primes generated")
 
 for i in primes:
     if len(set(str(i))) < len(str(i)):
-        pass
+        # here only primes with double digits
+        print(i)
