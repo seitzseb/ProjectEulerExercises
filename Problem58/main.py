@@ -23,9 +23,21 @@
 # 1, 3, 5, 7, 9, 13, 17, 21, 25, 31, 37, 43, 49
 # -, 2, 2, 2, 2, 4, 4, 4, 4, 6, 6, 6, 6, 6
 
-num = 1
+from utilities import isprime
 
-for dim in range(2,5):
-    for i in range(3):
-        num+=dim
-        print(num)
+num = 1
+diagnums = 0
+diagprimes = 0
+for dim in range(1,100000):
+    for i in range(4):
+        num+=dim*2
+        if isprime(num):
+            diagprimes +=1
+        diagnums +=1
+        
+
+    ratio = diagprimes/diagnums
+    print(f"the Ratio for edgelength of {1+(dim*2)} is {ratio}, max diagnum: {num}")
+    #print(diagnums)
+    if diagnums> diagprimes*10:
+        exit()
